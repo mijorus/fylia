@@ -1,6 +1,6 @@
 <script lang="ts">
     import Footer from "$lib/components/Footer.svelte";
-import Nav from "$lib/components/Nav.svelte";
+    import Nav from "$lib/components/Nav.svelte";
     import Trash from "$lib/components/Trash.svelte";
     import { supabase } from "$lib/supabaseClient";
     import type { User } from "@supabase/supabase-js";
@@ -9,9 +9,9 @@ import Nav from "$lib/components/Nav.svelte";
 
     let user: App.StoreUser = getContext("user");
     let stats = [];
-    
+
     function deleteProfile(e: MouseEvent) {
-        if (confirm('Do you really want to delete your profile? This action is irreversible!')) {
+        if (confirm("Do you really want to delete your profile? This action is irreversible!")) {
             if ($user) {
                 // await supabase.from('baskets').delete().eq('user_id', $user.id);
             }
@@ -41,16 +41,20 @@ import Nav from "$lib/components/Nav.svelte";
                     </div>
                 </div>
             </div>
-            {#if stats.length}
-                <div class="mt-10">
-                    <strong><i class="fa-solid fa-chart-simple text-blue-500" /> Usage</strong>
+            <div class="mt-10">
+                <strong><i class="fa-solid fa-chart-simple text-blue-500" /> Usage</strong>
+                {#if stats.length}
                     <ul class="list-disc p-5 pb-0">
                         {#each stats as s}
                             <li><Label>{s.name}: Used {s.usage} time(s)</Label></li>
                         {/each}
                     </ul>
-                </div>
-            {/if}
+                    {:else}
+                   <div class="mt-5">
+                    <small>No usage data yet</small>
+                   </div>
+                {/if}
+            </div>
             <!-- <div class="mt-10 pt-10 border-t">
                 <Button color="red" outline size="sm"><Trash /> Delete your profile</Button>
             </div> -->
@@ -62,4 +66,4 @@ import Nav from "$lib/components/Nav.svelte";
     </div>
 </div>
 
-<Footer></Footer>
+<Footer />

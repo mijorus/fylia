@@ -96,10 +96,10 @@
                         <strong>How it works</strong>
                     </div>
                     <ol class="list-disc p-3">
-                        <li>1. 🔗Create a new magic link that points to a website (like Amazon)</li>
-                        <li>2. 📹Add your favourite creators</li>
-                        <li>3. 🔖Save it as favourite</li>
-                        <li>4. 🚀USE IT!</li>
+                        <li>1. 🔗 Create a new magic link that points to a website (like Amazon)</li>
+                        <li>2. 📹 Add your favourite creators</li>
+                        <li>3. 🔖 Save it as favourite</li>
+                        <li>4. 🚀 USE IT!</li>
                     </ol>
                     <div class="mt-10"><strong>On a new device?</strong></div>
                     <p>Use the <em>Preview</em> button to open your links without the automatic redirect!</p>
