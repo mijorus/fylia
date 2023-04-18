@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"svelte.plugin.svelte.format.config.printWidth": 200
+	}
+}
