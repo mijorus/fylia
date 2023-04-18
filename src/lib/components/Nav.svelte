@@ -22,8 +22,8 @@
     <NavHamburger on:click={toggle} />
     <NavUl {hidden}>
         {#if $user}
+        <NavLi href="/profile">Profile</NavLi>
             <NavLi href="/basket">My basket</NavLi>
-            <NavLi href="/profile">Profile</NavLi>
             <NavLi href="https://github.com/mijorus/fylia">Source Code</NavLi>
             <NavLi href="/about">About</NavLi>
             <NavLi href="/logout" on:click={logout}>
