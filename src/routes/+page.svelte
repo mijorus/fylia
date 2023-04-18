@@ -52,7 +52,7 @@
     <hr>
     <section class="container mx-auto my-10">
         <div class="text-center">
-            <h2 class="text-3xl font-extrabold md:text-4xl xl:text-5xl dark:text-white">No more choosing how deserves the spotlight!</h2>
+            <h2 class="text-3xl font-extrabold md:text-4xl xl:text-5xl dark:text-white">No more choosing who deserves the spotlight!</h2>
             <div class="mt-5">Start supporting your fellow creators today.</div>
             <div class="mt-10">
                 <Button href="/login" size="xl" color="red" class="inline-flex items-center justify-center mr-3">Register now</Button>

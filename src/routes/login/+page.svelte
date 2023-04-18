@@ -6,6 +6,7 @@
     import type { Provider } from "@supabase/supabase-js";
     import { getContext } from "svelte";
     import { goto } from "$app/navigation";
+    import { PUBLIC_ENV } from "$env/static/public";
 
     let loginError = false;
 
@@ -22,7 +23,8 @@
 
         userStatus.set('loading');
         const { data, error } = await supabase.auth.signInWithOAuth({
-            provider
+            provider,
+            options: { redirectTo: PUBLIC_ENV === 'dev' ? 'http://localhost:5173' : 'https://fylia.co'}
         });
     }
 </script>
@@ -41,7 +43,7 @@
                     <p class="text-red-500">Login error!</p>
                 {/if}
                 <form class="flex flex-col space-y-6" action="/">
-                    <Button size="lg" type="submit" class="w-full1">
+                    <Button size="lg" type="submit" class="w-full1"  on:click={() => loginWithProvider("google")}>
                         <i class="text-lg"><Fa icon={faGoogle} /></i>
                         &nbsp; Login with Google
                     </Button>

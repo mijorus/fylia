@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { page } from "$app/stores";
     import { supabase } from "$lib/supabaseClient";
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button } from "flowbite-svelte";
     import { getContext } from "svelte";
@@ -22,17 +23,17 @@
     <NavHamburger on:click={toggle} />
     <NavUl {hidden}>
         {#if $user}
-        <NavLi href="/profile">Profile</NavLi>
-            <NavLi href="/basket">My basket</NavLi>
-            <NavLi href="https://github.com/mijorus/fylia">Source Code</NavLi>
-            <NavLi href="/about">About</NavLi>
-            <NavLi href="/logout" on:click={logout}>
-                <span class="text-red-500">Logout</span>
+            <NavLi active={$page.route.id == "/profile"} href="/profile"><i class="fas fa-user" /> Profile</NavLi>
+            <NavLi active={$page.route.id == "/basket"} href="/basket"><i class="fa-regular fa-rectangle-list" /> My basket</NavLi>
+            <NavLi href="https://github.com/mijorus/fylia"><i class="fas fa-code" /> Source Code</NavLi>
+            <!-- <NavLi active={$page.route.id == "/about"} href="/about"><i class="fa-regular fa-circle-question" /> About</NavLi> -->
+            <NavLi active={$page.route.id == "/logout"} href="/logout" on:click={logout}>
+                <span class="text-red-500"><i class="fa-solid fa-arrow-right-from-bracket" /> Logout</span>
             </NavLi>
         {:else}
-            <NavLi href="/login"><span><strong>Login</strong></span></NavLi>
-            <NavLi href="/about"><span>About</span></NavLi>
-            <NavLi href="https://github.com/mijorus/fylia">Source Code</NavLi>
+            <NavLi active={$page.route.id === "/login"} href="/login"><span><strong style="color: purple">Login</strong></span></NavLi>
+            <NavLi href="https://github.com/mijorus/fylia"><i class="fas fa-code" /> Source Code</NavLi>
+            <!-- <NavLi active={$page.route.id === "/about"} href="/about"><span><i class="fa-regular fa-circle-question" /> About</span></NavLi> -->
             <!-- <NavLi href="/login">
                 <Button outline color="red">Login</Button>
             </NavLi> -->
