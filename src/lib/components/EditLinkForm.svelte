@@ -59,7 +59,7 @@
     }
 </script>
 
-<form bind:this={form} class="p-3 md:p-10 bg-white border rounded-xl">
+<form bind:this={form} class="mt-10 p-3 md:p-10 bg-white border rounded-xl">
     {#if withErrors.length}
         <div transition:slide>
             <Alert color="red">
@@ -74,6 +74,13 @@
         <Label for="bundle-name" class="block mb-2">Link name</Label>
         <Input required bind:value={name} id="bundle-name" size="lg" placeholder="Amazon, Wish, Flipkart..." defaultClass="block w-full md:w-2/3 lg:w-1/2" />
     </div>
+    
+    <div>
+        <Alert color='yellow'>
+            📹 Issue pasting links from Youtube? Just copy the whole line as text, Fylia will keep the relevant part of the URL!
+        </Alert>
+    </div>
+    
     {#each links as link, i}
         <div class="mt-5" transition:slide|local>
             <p><b>Link #{i + 1}</b></p>

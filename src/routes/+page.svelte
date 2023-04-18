@@ -23,7 +23,7 @@
         </div>
     </section>
 
-    <section class="my-10">
+    <section class="my-10 p-2">
         <div class="container mx-auto">
             <div class="text-center">
                 <h2 class="text-3xl font-extrabold md:text-4xl xl:text-5xl dark:text-white">How it works</h2>
