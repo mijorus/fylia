@@ -5,7 +5,7 @@
     import { setContext } from "svelte";
     import { writable, type Writable } from "svelte/store";
     import { PUBLIC_ENV } from "$env/static/public";
-    import { Spinner } from 'flowbite-svelte';
+    import { Spinner } from "flowbite-svelte";
 
     const user: Writable<App.User> = writable();
     const userStatus: Writable<App.UserStatus> = writable("undefined");
@@ -14,27 +14,25 @@
     setContext("user", user);
     setContext("userStatus", userStatus);
 
-    supabase.auth
-        .getUser()
-        .then((data) => {
-            user.set(data.data.user);
-            userStatus.set(data.data.user ? "logged" : 'none');
-            
+    supabase.auth.onAuthStateChange((e, session) => {
+        if (session) {
+            user.set(session.user);
+            userStatus.set(session.user ? "logged" : "none");
+
             if (PUBLIC_ENV == "dev") {
                 console.log($userStatus);
-                console.log(data.data.user);
+                console.log(session.user);
             }
-        })
-        .catch((err) => {
-            userStatus.set("error");
-            console.log('qwe');
-            
-        });
+        } else {
+            user.set(null);
+            userStatus.set("none");
+        }
+    });
 </script>
 
 {#if $userStatus === "loading"}
     <div class="h-screen w-screen flex justify-center items-center">
-        <Spinner color="gray"/>
+        <Spinner color="gray" />
     </div>
 {:else}
     <slot />
