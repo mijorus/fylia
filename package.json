@@ -10,8 +10,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/adapter-netlify": "^2.0.6",
+		"@sveltejs/adapter-static": "^2.0.2",
 		"@sveltejs/kit": "^1.5.0",
 		"autoprefixer": "^10.4.14",
 		"postcss": "^8.4.21",
@@ -29,6 +28,7 @@
 		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@popperjs/core": "^2.11.7",
 		"@supabase/supabase-js": "^2.14.0",
+		"@sveltejs/adapter-auto": "^2.0.0",
 		"classnames": "^2.3.2",
 		"flowbite-svelte": "^0.34.6",
 		"svelte-fa": "^3.0.3"
