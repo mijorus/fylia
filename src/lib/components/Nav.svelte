@@ -23,14 +23,16 @@
     <NavUl {hidden}>
         {#if $user}
             <NavLi href="/basket">My basket</NavLi>
+            <NavLi href="/profile">Profile</NavLi>
+            <NavLi href="https://github.com/mijorus/fylia">Source Code</NavLi>
             <NavLi href="/about">About</NavLi>
             <NavLi href="/logout" on:click={logout}>
                 <span class="text-red-500">Logout</span>
             </NavLi>
         {:else}
-            <NavLi href="/login"><span class="text-blue-500">Login</span></NavLi>
-            <NavLi href="/github">Github</NavLi>
-            <NavLi href="/about">About</NavLi>
+            <NavLi href="/login"><span><strong>Login</strong></span></NavLi>
+            <NavLi href="/about"><span>About</span></NavLi>
+            <NavLi href="https://github.com/mijorus/fylia">Source Code</NavLi>
             <!-- <NavLi href="/login">
                 <Button outline color="red">Login</Button>
             </NavLi> -->
