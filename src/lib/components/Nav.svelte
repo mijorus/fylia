@@ -23,15 +23,28 @@
     <NavHamburger on:click={toggle} />
     <NavUl {hidden}>
         {#if $user}
-            <NavLi active={$page.route.id == "/profile"} href="/profile"><i class="fas fa-user" /> Profile</NavLi>
-            <NavLi active={$page.route.id == "/basket"} href="/basket"><i class="fa-regular fa-rectangle-list" /> My basket</NavLi>
+            <NavLi active={$page.route.id == "/profile"}>
+                <a data-sveltekit-reload href="/profile"><i class="fas fa-user" /> Profile</a></NavLi
+            >
+            <NavLi active={$page.route.id == "/basket"}>
+                <a data-sveltekit-reload href="/basket">
+                    <i class="fa-regular fa-rectangle-list" /> My basket
+                </a></NavLi
+            >
             <NavLi href="https://github.com/mijorus/fylia"><i class="fas fa-code" /> Source Code</NavLi>
             <!-- <NavLi active={$page.route.id == "/about"} href="/about"><i class="fa-regular fa-circle-question" /> About</NavLi> -->
             <NavLi active={$page.route.id == "/logout"} href="/logout" on:click={logout}>
-                <span class="text-red-500"><i class="fa-solid fa-arrow-right-from-bracket" /> Logout</span>
+                <a data-sveltekit-reload href="/logout">
+                    <span class="text-red-500">
+                        <i class="fa-solid fa-arrow-right-from-bracket" />
+                        Logout
+                    </span>
+                </a>
             </NavLi>
         {:else}
-            <NavLi active={$page.route.id === "/login"} href="/login"><span><strong style="color: purple">Login</strong></span></NavLi>
+            <NavLi active={$page.route.id === "/login"}>
+                <a href="/login" data-sveltekit-reload><span><strong style="color: purple">Login</strong></span></a>
+            </NavLi>
             <NavLi href="https://github.com/mijorus/fylia"><i class="fas fa-code" /> Source Code</NavLi>
             <!-- <NavLi active={$page.route.id === "/about"} href="/about"><span><i class="fa-regular fa-circle-question" /> About</span></NavLi> -->
             <!-- <NavLi href="/login">
