@@ -23,16 +23,37 @@
     <NavHamburger on:click={toggle} />
     <NavUl {hidden}>
         {#if $user}
-            <NavLi active={$page.route.id == "/profile"} href="/profile"><i class="fas fa-user" /> Profile</NavLi>
-            <NavLi active={$page.route.id == "/basket"} href="/basket"><i class="fa-regular fa-rectangle-list" /> My basket</NavLi>
-            <NavLi href="https://github.com/mijorus/fylia"><i class="fas fa-code" /> Source Code</NavLi>
+            <a data-sveltekit-reload href="/profile">
+                <NavLi active={$page.route.id == "/profile"}>
+                    <i class="fas fa-user" /> Profile
+                </NavLi>
+            </a>
+            <a data-sveltekit-reload href="/basket">
+                <NavLi active={$page.route.id == "/basket"}>
+                    <i class="fa-regular fa-rectangle-list" /> My basket
+                </NavLi>
+            </a>
+            <a href="https://github.com/mijorus/fylia">
+                <NavLi><i class="fas fa-code" /> Source Code</NavLi>
+            </a>
             <!-- <NavLi active={$page.route.id == "/about"} href="/about"><i class="fa-regular fa-circle-question" /> About</NavLi> -->
-            <NavLi active={$page.route.id == "/logout"} href="/logout" on:click={logout}>
-                <span class="text-red-500"><i class="fa-solid fa-arrow-right-from-bracket" /> Logout</span>
-            </NavLi>
+            <a data-sveltekit-reload href="/logout">
+                <NavLi active={$page.route.id == "/logout"} href="/logout" on:click={logout}>
+                    <span class="text-red-500">
+                        <i class="fa-solid fa-arrow-right-from-bracket" />
+                        Logout
+                    </span>
+                </NavLi>
+            </a>
         {:else}
-            <NavLi active={$page.route.id === "/login"} href="/login"><span><strong style="color: purple">Login</strong></span></NavLi>
-            <NavLi href="https://github.com/mijorus/fylia"><i class="fas fa-code" /> Source Code</NavLi>
+            <a href="/login" data-sveltekit-reload>
+                <NavLi active={$page.route.id === "/login"}>
+                    <span><strong style="color: purple">Login</strong></span>
+                </NavLi>
+            </a>
+            <a href="https://github.com/mijorus/fylia">
+                <NavLi><i class="fas fa-code" /> Source Code</NavLi>
+            </a>
             <!-- <NavLi active={$page.route.id === "/about"} href="/about"><span><i class="fa-regular fa-circle-question" /> About</span></NavLi> -->
             <!-- <NavLi href="/login">
                 <Button outline color="red">Login</Button>

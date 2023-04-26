@@ -1,22 +1,27 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import Footer from "$lib/components/Footer.svelte";
     import Nav from "$lib/components/Nav.svelte";
-    import Trash from "$lib/components/Trash.svelte";
     import { supabase } from "$lib/supabaseClient";
-    import type { User } from "@supabase/supabase-js";
     import { Avatar, Button, Label, Spinner } from "flowbite-svelte";
     import { getContext } from "svelte";
 
-    let user: App.StoreUser = getContext("user");
+    const user: App.StoreUser = getContext("user");
+    const userStatus: App.StoreUserStatus = getContext("userStatus");
+
     let stats = [];
 
-    function deleteProfile(e: MouseEvent) {
-        if (confirm("Do you really want to delete your profile? This action is irreversible!")) {
-            if ($user) {
-                // await supabase.from('baskets').delete().eq('user_id', $user.id);
-            }
-        }
-    }
+    userStatus.subscribe((u) => {
+        if (u === "none") goto("/");
+    });
+
+    // function deleteProfile(e: MouseEvent) {
+    //     if (confirm("Do you really want to delete your profile? This action is irreversible!")) {
+    //         if ($user) {
+    //             // await supabase.from('baskets').delete().eq('user_id', $user.id);
+    //         }
+    //     }
+    // }
 
     user.subscribe(async (u) => {
         if (u) {
@@ -27,7 +32,7 @@
 
 <Nav />
 
-<div class="w-full py-10 bg-primarybg min-h-screen">
+<div class="w-full py-10 bg-primarybg min-h-screen p-3 md:p-10">
     <div class="p-5 rounded-xl container mx-auto bg-white border">
         {#if $user}
             <div class="mb-10 flex items-center space-x-4">
