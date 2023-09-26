@@ -6,7 +6,6 @@
     import { faWarning, faWifi } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
-    export let mode: "edit" | "create" = "create";
     export let form;
     export let name = "";
     export let links: App.BundleLink[];
