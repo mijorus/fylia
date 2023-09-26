@@ -9,12 +9,10 @@
     import Fa from "svelte-fa";
 
     let data: App.BundleDB[] | null = null;
-    const previewKey = (Math.random() + 1).toString(36).substring(6);
+    let previewKey: string;
     const user: App.StoreUser = getContext("user");
     let loaded = false;
     let deletingId: string;
-
-    sessionStorage.setItem("previewKey", previewKey);
 
     user.subscribe(async (u) => {
         if (!u || loaded) return;
@@ -26,6 +24,11 @@
     async function getAll() {
         return await supabase.from("baskets").select().eq("user_id", $user.id);
     }
+
+    onMount(() => {
+        previewKey = (Math.random() + 1).toString(36).substring(6);
+        sessionStorage.setItem("previewKey", previewKey);
+    });
 
     async function deleteItem(id: string) {
         if (confirm("Do you really want to delete this link?")) {

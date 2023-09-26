@@ -13,6 +13,7 @@
     import { save } from "$lib/basket";
     import { goto } from "$app/navigation";
     import EditLinkForm from "$lib/components/EditLinkForm.svelte";
+    import { browser } from "$app/environment";
 
     const user: App.StoreUser = getContext("user");
     let form: HTMLFormElement;
@@ -36,6 +37,8 @@
     }
 
     async function saveItem() {
+        if (!browser) return;
+        
         if (form.checkValidity()) {
             if (name.length > 200) {
                 return alert("Please use names shorter than 200 characters");

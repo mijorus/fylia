@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
     import { page } from "$app/stores";
     import { supabase } from "$lib/supabaseClient";
     import { faArrowLeft, faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -11,11 +12,9 @@
     let next_visit = 0;
     let mode: "preview" | null = null;
 
-    if (sessionStorage.getItem("previewKey") === $page.url.searchParams.get("preview_key")) {
-        mode = "preview";
-    }
-
     function letsgo() {
+        if (!browser) return;
+
         sessionStorage.removeItem("previewKey");
         window.location.reload();
     }
@@ -27,6 +26,10 @@
     }
 
     onMount(async () => {
+        if (sessionStorage.getItem("previewKey") === $page.url.searchParams.get("preview_key")) {
+            mode = "preview";
+        }
+
         console.log($page.params.code);
         const query = await supabase.from("baskets").select().eq("id", $page.params.code).single();
 

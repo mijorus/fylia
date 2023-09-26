@@ -7,10 +7,7 @@
     import Trash from "$lib/components/Trash.svelte";
     import { slide } from "svelte/transition";
     import { supabase } from "$lib/supabaseClient";
-    import { getContext } from "svelte";
-    import type { User } from "@supabase/supabase-js";
-    import { PUBLIC_ENV } from "$env/static/public";
-    import { save } from "$lib/basket";
+    import { getContext, onMount } from "svelte";
     import { goto } from "$app/navigation";
     import EditLinkForm from "$lib/components/EditLinkForm.svelte";
     import { page } from "$app/stores";
@@ -23,24 +20,6 @@
     let item: App.BundleDB;
     let publicBundle = false;
     let addDelay = false;
-
-    user.subscribe(async (u) => {
-        if (u && !dataLoaded && $page.params.code) {
-            const { data, error } = await supabase.from("baskets").select().eq("id", $page.params.code).single();
-            dataLoaded = true;
-
-            if (error || !data) {
-                return alert("There was an error loading this item");
-            }
-
-            name = data.name;
-            links = data.data.links;
-            item = data;
-            addDelay = data.data.addDelay;
-            publicBundle = data.public;
-            
-        }
-    });
 
     function addItem() {
         links = [...links, { link: "", creator: "" }];
@@ -74,6 +53,25 @@
             goto("/basket");
         }
     }
+
+    onMount(() => {
+        user.subscribe(async (u) => {
+            if (u && !dataLoaded && $page.params.code) {
+                const { data, error } = await supabase.from("baskets").select().eq("id", $page.params.code).single();
+                dataLoaded = true;
+
+                if (error || !data) {
+                    return alert("There was an error loading this item");
+                }
+
+                name = data.name;
+                links = data.data.links;
+                item = data;
+                addDelay = data.data.addDelay;
+                publicBundle = data.public;
+            }
+        });
+    });
 </script>
 
 <Container>

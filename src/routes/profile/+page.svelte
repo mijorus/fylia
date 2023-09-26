@@ -4,16 +4,11 @@
     import Nav from "$lib/components/Nav.svelte";
     import { supabase } from "$lib/supabaseClient";
     import { Avatar, Button, Label, Spinner } from "flowbite-svelte";
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
 
     const user: App.StoreUser = getContext("user");
     const userStatus: App.StoreUserStatus = getContext("userStatus");
-
-    let stats = [];
-
-    userStatus.subscribe((u) => {
-        if (u === "none") goto("/");
-    });
+    let stats: any = [];
 
     // function deleteProfile(e: MouseEvent) {
     //     if (confirm("Do you really want to delete your profile? This action is irreversible!")) {
@@ -23,10 +18,16 @@
     //     }
     // }
 
-    user.subscribe(async (u) => {
-        if (u) {
-            stats = (await supabase.from("baskets").select("name,usage").eq("user_id", $user.id)).data;
-        }
+    onMount(async () => {
+        userStatus.subscribe((u) => {
+            if (u === "none") goto("/");
+        });
+
+        user.subscribe(async (u) => {
+            if (u) {
+                stats = (await supabase.from("baskets").select("name,usage").eq("user_id", u.id)).data;
+            }
+        });
     });
 </script>
 
@@ -54,10 +55,10 @@
                             <li><Label>{s.name}: Used {s.usage} time(s)</Label></li>
                         {/each}
                     </ul>
-                    {:else}
-                   <div class="mt-5">
-                    <small>No usage data yet</small>
-                   </div>
+                {:else}
+                    <div class="mt-5">
+                        <small>No usage data yet</small>
+                    </div>
                 {/if}
             </div>
             <!-- <div class="mt-10 pt-10 border-t">

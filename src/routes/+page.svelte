@@ -3,7 +3,7 @@
     import Footer from "$lib/components/Footer.svelte";
     import Nav from "$lib/components/Nav.svelte";
     import { Button, Label, Timeline, TimelineItem } from "flowbite-svelte";
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
 
     const user: App.StoreUser = getContext("user");
 
@@ -49,7 +49,7 @@
         </div>
     </section>
 
-    <hr>
+    <hr />
     <section class="container mx-auto my-10">
         <div class="text-center">
             <h2 class="text-3xl font-extrabold md:text-4xl xl:text-5xl dark:text-white">No more choosing who deserves the spotlight!</h2>
@@ -59,7 +59,7 @@
             </div>
         </div>
     </section>
-    <hr>
-    <section class="my-20"></section>
+    <hr />
+    <section class="my-20" />
 </div>
 <Footer />

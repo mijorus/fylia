@@ -4,7 +4,7 @@
     import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
     import { supabase } from "$lib/supabaseClient";
     import type { Provider } from "@supabase/supabase-js";
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { PUBLIC_ENV } from "$env/static/public";
 
@@ -12,21 +12,24 @@
 
     const user: App.StoreUser = getContext("user");
     const userStatus: App.StoreUserStatus = getContext("userStatus");
-    if ($user) {
-        goto("/");
-    }
 
     async function loginWithProvider(provider: Provider) {
         if (!["github", "google"].includes(provider)) {
             throw new Error("invalid provider");
         }
 
-        userStatus.set('loading');
+        userStatus.set("loading");
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider,
-            options: { redirectTo: PUBLIC_ENV === 'dev' ? 'http://localhost:5173' : 'https://fylia.co'}
+            options: { redirectTo: PUBLIC_ENV === "dev" ? "http://localhost:5173" : "https://fylia.co" },
         });
     }
+
+    onMount(() => {
+        if ($user) {
+            goto("/");
+        }
+    });
 </script>
 
 <div class="h-screen w-screen flex flex-col md:flex-row">
@@ -43,7 +46,7 @@
                     <p class="text-red-500">Login error!</p>
                 {/if}
                 <form class="flex flex-col space-y-6" action="/">
-                    <Button size="lg" type="submit" class="w-full1"  on:click={() => loginWithProvider("google")}>
+                    <Button size="lg" type="submit" class="w-full1" on:click={() => loginWithProvider("google")}>
                         <i class="text-lg"><Fa icon={faGoogle} /></i>
                         &nbsp; Login with Google
                     </Button>
