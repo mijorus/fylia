@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+User-agent: *
+Disallow: /basket
+
+User-agent: *
+Disallow: /basket/
+
+User-agent: *
+Disallow: /profile
+
+User-agent: *
+Disallow: /basket/
